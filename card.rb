@@ -11,10 +11,10 @@ class Card
   attr_reader :merit, :suit
 
   def initialize(suit, merit)
-    raise "Wrong suit for card. Should be in range #{SUITS.values}." unless SUITS.include?(suit)
+    raise "Wrong suit '#{suit}'for card. Should be in range #{SUITS.values}." unless SUITS.include?(suit)
 
     @suit = suit
-    raise "Wrong merit '#{merit} for card. Should be in range #{MERITS}." unless MERITS.include?(merit)
+    raise "Wrong merit '#{merit}' for card. Should be in range #{MERITS}." unless MERITS.include?(merit)
 
     @merit = merit
   end
