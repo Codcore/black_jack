@@ -16,8 +16,8 @@
     2. [x] _can_ _**shuffle_cards**_!
     3. [x] _can_ **_draw_card :_** **Card**
 6. [ ] **Hand**
-    1. [ ] _has_ _**cards :**_  **[] of Card** 
-    2. [ ] _can_ _**add_card**_
+    1. [x] _has_ _**cards :**_  **[] of Card** 
+    2. [ ] _can_ _**pull_card**_
 7. [ ] **Bank**
     1. [ ] _has_ _**amount**_
 8. [ ] **Interface** (View)

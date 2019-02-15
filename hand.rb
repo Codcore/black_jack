@@ -9,4 +9,8 @@ class Hand
   def pull_card(card)
     @cards << card
   end
+
+  def full?
+    true if @cards.length == 3
+  end
 end
