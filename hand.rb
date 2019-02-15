@@ -1,11 +1,11 @@
+require 'card_deck'
+
 class Hand
   attr_reader :cards
 
-  def initialize(cards)
-    raise "Hand should be initialized with 2 cards, not #{cards.size}." if cards.size > 2
-
-    @cards = []
-    @cards.concat(cards)
+  def initialize
+    @deck  = CardDeck.instance
+    @cards = @deck.draw_initial_hand
   end
 
   def pull_card(card)

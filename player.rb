@@ -2,8 +2,10 @@ require_relative 'bank'
 require_relative 'hand'
 
 class Player
-  def initialize(name, cards)
+  attr_reader :name, :hand, :bank
+  def initialize(name)
+    @name = name
     @bank = Bank.new
-    @hand = Hand.new(cards)
+    @hand = Hand.new
   end
 end

@@ -1,6 +1,9 @@
 require_relative 'card'
+require 'singleton'
 
 class CardDeck
+  include Singleton
+
   attr_reader :cards
 
   def initialize
@@ -15,6 +18,18 @@ class CardDeck
   end
 
   def draw_card
+    raise 'Cannot draw card: card deck is empty.' if @cards.empty?
+
     @cards.pop
+  end
+
+  def draw_initial_hand
+    cards = []
+    2.times { cards << draw_card }
+    cards
+  end
+
+  def empty?
+    @cards.empty?
   end
 end
