@@ -11,12 +11,12 @@
 4. [x] **Card**
     1. [x] _has_ **_suit_**
     2. [x] _has_ **_value_**
-5. [ ] **Deck**
-    1. [ ] _has_ **Card** _**‘s**_
-    2. [ ] _can_ _**shuffle_cards**_!
-    3. [ ] _can_ **_draw_card :_** **Card**
+5. [ ] **CardDeck**
+    1. [x] _has_ _**cards :**_  **[] of Card** 
+    2. [x] _can_ _**shuffle_cards**_!
+    3. [x] _can_ **_draw_card :_** **Card**
 6. [ ] **Hand**
-    1. [ ] _has_ **_Card_** _**’s**_
+    1. [ ] _has_ _**cards :**_  **[] of Card** 
     2. [ ] _can_ _**add_card**_
 7. [ ] **Bank**
     1. [ ] _has_ _**amount**_
