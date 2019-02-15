@@ -14,7 +14,7 @@ class CardDeck
     @cards.shuffle!
   end
 
-  def pop_card
+  def draw_card
     @cards.pop
   end
 end
