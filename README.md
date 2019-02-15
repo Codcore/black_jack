@@ -15,10 +15,11 @@
     1. [x] _has_ _**cards :**_  **[] of Card** 
     2. [x] _can_ _**shuffle_cards**_!
     3. [x] _can_ **_draw_card :_** **Card**
-6. [ ] **Hand**
+6. [x] **Hand**
     1. [x] _has_ _**cards :**_  **[] of Card** 
     2. [x] _can_ _**pull_card**_
-7. [ ] **Bank**
+    3. [x] _can be_ _**full?**_
+7. [x] **Bank**
     1. [x] _has_ _**funds**_
     2. [x] _can_ _**bet**_
     3. [x] _can be_ _**empty?**_ 
