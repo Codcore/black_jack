@@ -16,4 +16,14 @@ class Card
 
     @merit = merit
   end
+
+  def value
+    value = @merit.to_i
+    # TODO: temporary stub for Ace value
+    return 11 if @merit == 'A'
+
+    return 10 if value.zero?
+
+    value
+  end
 end
