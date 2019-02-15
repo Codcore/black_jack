@@ -13,4 +13,8 @@ class CardDeck
   def shuffle
     @cards.shuffle!
   end
+
+  def pop_card
+    @cards.pop
+  end
 end
