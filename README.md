@@ -17,9 +17,11 @@
     3. [x] _can_ **_draw_card :_** **Card**
 6. [ ] **Hand**
     1. [x] _has_ _**cards :**_  **[] of Card** 
-    2. [ ] _can_ _**pull_card**_
+    2. [x] _can_ _**pull_card**_
 7. [ ] **Bank**
-    1. [ ] _has_ _**amount**_
+    1. [x] _has_ _**funds**_
+    2. [x] _can_ _**bet**_
+    3. [x] _can be_ _**empty?**_ 
 8. [ ] **Interface** (View)
 9. [ ] **Game** (Model)
     1. [ ] _has_ _**dealer :**_ **Dealer**
