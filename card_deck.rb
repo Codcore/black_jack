@@ -9,4 +9,8 @@ class CardDeck
       Card::MERITS.each { |merit| @cards << Card.new(suit, merit) }
     end
   end
+
+  def shuffle
+    @cards.shuffle!
+  end
 end
