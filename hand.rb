@@ -15,6 +15,6 @@ class Hand
   end
 
   def full?
-    true if @cards.size == 3
+    @cards.size == 3
   end
 end
