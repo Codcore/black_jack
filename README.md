@@ -11,7 +11,7 @@
 4. [x] **Card**
     1. [x] _has_ **_suit_**
     2. [x] _has_ **_value_**
-5. [ ] **CardDeck**
+5. [x] **CardDeck**
     1. [x] _has_ _**cards :**_  **[] of Card** 
     2. [x] _can_ _**shuffle_cards**_!
     3. [x] _can_ **_draw_card :_** **Card**
