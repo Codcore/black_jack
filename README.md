@@ -8,9 +8,9 @@
     2. [ ] _has_ _**bank :**_ **Bank**
     3. [ ] _can_ _**skip_move**_
     4. [ ] _can_ _**add_card**_
-4. [ ] **Card**
-    1. [ ] _has_ **_suit_**
-    2. [ ] _has_ **_value_**
+4. [x] **Card**
+    1. [x] _has_ **_suit_**
+    2. [x] _has_ **_value_**
 5. [ ] **Deck**
     1. [ ] _has_ **Card** _**‘s**_
     2. [ ] _can_ _**shuffle_cards**_!
