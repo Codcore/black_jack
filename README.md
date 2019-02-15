@@ -20,11 +20,11 @@
     2. [x] _can_ _**bet**_
     3. [x] _can be_ _**empty?**_ 
 8. [ ] **Interface** (View)
-9. [ ] **Game** (Model)
-    1. [ ] _has_ _**dealer :**_ **Dealer**
-    2. [ ] _has_ **_user :_** **User**
-    3. [ ] _has_ **_deck :_** **CardDeck**
-    4. [ ] _has_ **_bank_** : **Bank**
+9. [x] **Game** (Model)
+    1. [x] _has_ _**dealer :**_ **Dealer**
+    2. [x] _has_ **_user :_** **User**
+    3. [x] _has_ **_deck :_** **CardDeck**
+    4. [x] _has_ **_bank_** : **Bank**
 10. [ ] **GameController** (Controller)
     1. [ ] **has** **_game :_** **Game**
     2. [ ] _has_ **_interface:_** **Interface**
