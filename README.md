@@ -4,10 +4,10 @@
     1. [ ] _can_ _**hand_out :**_ **Hand**
     2. [ ] _can_ _**deal**_
 3. [ ] **Player**
-    1. [ ] _has_ _**hand :**_ **Hand**
-    2. [ ] _has_ _**bank :**_ **Bank**
+    1. [x] _has_ _**hand :**_ **Hand**
+    2. [x] _has_ _**bank :**_ **Bank**
     3. [ ] _can_ _**skip_move**_
-    4. [ ] _can_ _**add_card**_
+    4. [ ] _can_ _**make_move**_
 4. [x] **Card**
     1. [x] _has_ **_suit_**
     2. [x] _has_ **_value_**
