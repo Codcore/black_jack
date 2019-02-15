@@ -1,6 +1,6 @@
 # Black Jack
-1. [ ] **User** << **Player**
-2. [ ] **Dealer** << **Player**
+1. [x] **User** << **Player**
+2. [x] **Dealer** << **Player**
 3. [x] **Player**
     1. [x] _has_ _**hand :**_ **Hand**
     2. [x] _has_ _**bank :**_ **Bank**
@@ -26,8 +26,8 @@
     3. [x] _has_ **_deck :_** **CardDeck**
     4. [x] _has_ **_bank_** : **Bank**
 10. [ ] **GameController** (Controller)
-    1. [ ] **has** **_game :_** **Game**
-    2. [ ] _has_ **_interface:_** **Interface**
+    1. [x] **has** **_game :_** **Game**
+    2. [x] _has_ **_interface:_** **Interface**
     3. [ ] _can_ _**hand_out :**_ **Hand**
     4. [ ] _can_ _**deal**_
     5. [ ] _can_ _**skip_move**_
