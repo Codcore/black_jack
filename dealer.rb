@@ -9,6 +9,7 @@ class Dealer < Player
     return if points >= 17
 
     @hand.pull_card(CardDeck.instance.draw_card) unless @hand.full?
+    true
   end
 
   def reset_hand

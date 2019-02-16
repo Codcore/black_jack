@@ -89,9 +89,9 @@ class GameController
   end
 
   def action_pull_card
-    @interface.actions_menu_items = [2]
     @user.hand.pull_card(@game.card_deck.draw_card)
     game_over(@dealer) if @user.points > BLACK_JACK
+    game_over(winner) unless @dealer.move
   end
 
   def action_open_cards
