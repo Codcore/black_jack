@@ -9,7 +9,10 @@ class Game
   def initialize(user_name)
     @user      = User.new(user_name)
     @dealer    = Dealer.new
-    @bank      = Bank.new
+    @bank      = Bank.new(0)
     @card_deck = CardDeck.instance
+
+    @bank.receive(@user.bank.bet)
+    @bank.receive(@dealer.bank.bet)
   end
 end
