@@ -8,11 +8,24 @@ class GameController
 
   def initialize
     @interface = Interface.new
-    setup
+    init
     run
   end
 
   private
+
+  def set_up
+    @game   = Game.new(@user_name)
+    @user   = @game.user
+    @dealer = @game.dealer
+    @bank   = @game.bank
+    make_bets
+  end
+
+  def make_bets
+    @bank.receive(@user.bank.bet)
+    @bank.receive(@dealer.bank.bet)
+  end
 
   def run
     loop do
@@ -30,20 +43,19 @@ class GameController
     end
   end
 
-  def setup
+  def init
     @interface.show_msg(WELCOME_MESSAGE)
     @interface.show_menu(START_MENU)
     choice = @interface.user_choice(START_MENU.size)
     case choice
     when 1
       @interface.show_prompt(USER_NAME_PROMPT)
-      @game   = Game.new(@interface.user_input)
-      @user   = @game.user
-      @dealer = @game.dealer
+      @user_name = @interface.user_input
+      set_up
     when 2 then return
     else
       @interface.show_msg(INVALID_CHOICE)
-      setup
+      init
     end
   end
 
@@ -53,7 +65,7 @@ class GameController
   end
 
   def action_pull_card
-    @user.hand.pull_card(CardDeck.instance.draw_card)
+    @user.hand.pull_card(@game.card_deck.draw_card)
     game_over(@dealer) if @user.points > 21
   end
 
@@ -70,15 +82,19 @@ class GameController
   end
 
   def game_over(winner)
-    @dealer
+    @dealer.hand.visible = true
+    @interface.show_game_screen(@dealer, @user)
     @interface.show_msg("#{winner.name.upcase} IS WIN!!!")
     #TODO: merge to one method
     @interface.show_menu(GAME_OVER_MENU)
     choice = @interface.user_choice(GAME_OVER_MENU.size)
     case choice
     when 1
-      CardDeck.instance.refresh
-      return
+      @dealer.reset
+      @user.reset
+      @game.card_deck.refresh
+      winner.bank.receive(@bank.give_cash)
+      make_bets
     when 2
       exit
     end
