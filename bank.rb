@@ -9,9 +9,18 @@ class Bank
     raise 'Not enough funds in the bank to make a bet.' if (@funds - amount) < 0
 
     @funds -= amount
+    amount
+  end
+
+  def receive(amount)
+    @funds += amount
   end
 
   def empty?
     @funds.zero?
+  end
+
+  def to_s
+    @funds.to_s
   end
 end
