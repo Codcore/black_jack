@@ -118,8 +118,8 @@ class GameController
   def end_game(looser)
     @interface.show_empty_bank_msg(looser)
     winner = [@user, @dealer].delete(looser)
-    @interface.show_msg("You loose... =(") if winner.is_a? Dealer
-    @interface.show_msg("You win!!!".upcase) if winner.is_a? User
+    @interface.show_msg('You loose... =(') if winner.is_a? Dealer
+    @interface.show_msg('ou win!!!'.upcase) if winner.is_a? User
     init
   end
 
