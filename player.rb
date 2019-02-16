@@ -10,7 +10,7 @@ class Player
     @hand = Hand.new(visible_hand)
   end
 
-  def reset
+  def reset_hand
     @hand = Hand.new
   end
 

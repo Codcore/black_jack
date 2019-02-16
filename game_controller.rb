@@ -37,8 +37,8 @@ class GameController
       @dealer.receive(cash / 2)
       @user.receive(cash / 2)
     end
-    @dealer.reset
-    @user.reset
+    @dealer.reset_hand
+    @user.reset_hand
     make_bets
     @game.card_deck.refresh
     @interface.refresh_menu_items

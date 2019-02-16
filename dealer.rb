@@ -11,7 +11,7 @@ class Dealer < Player
     @hand.pull_card(CardDeck.instance.draw_card) unless @hand.full?
   end
 
-  def reset
+  def reset_hand
     @hand = Hand.new(false)
   end
 end
