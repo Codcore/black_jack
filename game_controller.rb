@@ -29,32 +29,43 @@ class GameController
     @bank.receive(@dealer.bank.bet)
   end
 
+  def try_again_set_up(winner)
+    winner.bank.receive(@bank.give_cash)
+    @dealer.reset
+    @user.reset
+    make_bets
+    @game.card_deck.refresh
+    @interface.refresh_menu_items
+  end
+
   def run
     loop do
+      system('clear')
       @interface.show_game_screen(@dealer, @user)
-      @interface.show_actions
-      choice = @interface.user_choice(ACTIONS_MENU.size)
-      @interface.show_msg(INVALID_CHOICE) unless choice
+      choice = @interface.show_menu_and_get_input(@interface.compose_actions_menu)
       case choice
-      when 1 then action_skip
-      when 2 then action_pull_card
-      when 3 then action_open_cards
+      when ACTIONS_MENU[0] then action_skip
+      when ACTIONS_MENU[1] then action_pull_card
+      when ACTIONS_MENU[2] then action_open_cards
       else next
       end
-      game_over(determine_winner) if @user.hand.full? && @dealer.hand.full?
+      end_game(@user) if @user.bank.empty?
+      end_game(@dealer) if @dealer.bank.empty?
+      game_over(winner) if @user.hand.full? && @dealer.hand.full?
     end
   end
 
   def init
+    system('clear')
     @interface.show_msg(WELCOME_MESSAGE)
-    @interface.show_menu(START_MENU)
-    choice = @interface.user_choice(START_MENU.size)
+    choice = @interface.show_menu_and_get_input(START_MENU)
+    puts choice
     case choice
-    when 1
-      @interface.show_prompt(USER_NAME_PROMPT)
-      @user_name = @interface.user_input
+    when START_MENU[0]
+      system('clear')
+      @user_name = @interface.show_prompt_and_get_input(USER_NAME_PROMPT)
       set_up
-    when 2 then return
+    when START_MENU[1] then return
     else
       @interface.show_msg(INVALID_CHOICE)
       init
@@ -62,44 +73,47 @@ class GameController
   end
 
   def action_skip
+    @interface.actions_menu_items = [1, 2] if @dealer.hand.full?
     @dealer.move
     game_over(@user) if @dealer.points > BLACK_JACK
     @interface.actions_menu_items = [1, 2]
   end
 
   def action_pull_card
+    @interface.actions_menu_items = [2]
     @user.hand.pull_card(@game.card_deck.draw_card)
     game_over(@dealer) if @user.points > BLACK_JACK
   end
 
   def action_open_cards
     @dealer.hand.visible = true
-    game_over(determine_winner)
+    game_over(winner)
   end
 
-  def determine_winner
-    return nil if @dealer.points == @user.points
-
-    #TODO: BLACK_JACK module
-    21 - @user.points < 21 - @dealer.points ? @user : @dealer
+  def winner
+    @game.determine_winner
   end
 
   def game_over(winner)
+    system('clear')
     @dealer.hand.visible = true
     @interface.show_game_screen(@dealer, @user)
-    @interface.show_msg("#{winner.name.upcase} IS WIN!!!")
-    #TODO: merge to one method
-    @interface.show_menu(GAME_OVER_MENU)
-    choice = @interface.user_choice(GAME_OVER_MENU.size)
+    @interface.show_msg("#{@user.name}, you win!!!".upcase) if winner.is_a? User
+    @interface.show_msg("#{@user.name}, you loose... =(") if winner.is_a? Dealer
+    choice = @interface.show_menu_and_get_input(GAME_OVER_MENU)
     case choice
-    when 1
-      @dealer.reset
-      @user.reset
-      @game.card_deck.refresh
-      winner.bank.receive(@bank.give_cash)
-      make_bets
-    when 2
-      exit
+    when GAME_OVER_MENU[0]
+      try_again_set_up(winner)
+    when GAME_OVER_MENU[1] then exit
+    else exit
     end
+  end
+
+  def end_game(looser)
+    @interface.show_empty_bank_msg(looser)
+    winner = [@user, @dealer].delete(looser)
+    @interface.show_msg("You loose... =(") if winner.is_a? Dealer
+    @interface.show_msg("You win!!!".upcase) if winner.is_a? User
+    init
   end
 end

@@ -1,7 +1,24 @@
 require_relative 'interface_messages'
 
 class Interface
+  attr_accessor :actions_menu_items
   include InterfaceMessages
+
+  def initialize
+    @actions_menu_items = [0, 1, 2]
+  end
+
+  def refresh_menu_items
+    initialize
+  end
+
+  def compose_actions_menu
+    actions_menu = []
+    @actions_menu_items.each do |index|
+      actions_menu << ACTIONS_MENU[index]
+    end
+    actions_menu
+  end
 
   def show_msg(msg, start_limiter = true, end_limiter = true)
     show_start_limiter if start_limiter
@@ -46,8 +63,19 @@ class Interface
     gets.chomp.to_s
   end
 
-  def show_menu(array)
+  def show_menu_and_get_input(array)
     show_msg(construct_menu(array))
+    choice = user_choice(array.size)
+    unless choice
+      show_msg(INVALID_CHOICE)
+      show_menu_and_get_input(array)
+    end
+    array[choice - 1]
+  end
+
+  def show_prompt_and_get_input(msg)
+    show_prompt(msg)
+    user_input
   end
 
   def show_hand(player)
@@ -75,8 +103,8 @@ class Interface
     end
   end
 
-  def show_actions
-    show_menu(ACTIONS_MENU)
+  def show_empty_bank_msg(player)
+    show_msg("Game is over!!! #{player.upcase} bank is empty!")
   end
 
   private
