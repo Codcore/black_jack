@@ -13,8 +13,6 @@ class Player
   def move; end
 
   def points
-    return nil unless @hand.visible
-
     points = 0
     @hand.cards.each do |card|
       if card.value.is_a?(Array)
@@ -25,5 +23,11 @@ class Player
       points += card.value
     end
     points
+  end
+
+  def show_points
+    return nil unless @hand.visible
+
+    points.to_s
   end
 end
