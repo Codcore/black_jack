@@ -4,7 +4,7 @@ module InterfaceMessages
   LIMITER_MIDDLE   = '╠══════════════════════════════════════════════════════════════╣'.freeze
   WELCOME_MESSAGE  = '⤛  Welcome to the BLACK JACK ⤜'.freeze
   USER_NAME_PROMPT = 'Enter your name'.freeze
-  INVALID_CHOICE   = 'Invalid choice. Try again'.freeze
+  INVALID_CHOICE   = 'ERROR: Invalid choice. Try again'.freeze
 
   CARD_MENU = [
     'Skip move',

@@ -35,8 +35,11 @@ class Interface
     puts LIMITER_END
   end
 
-  def user_choice
-    gets.to_i
+  def user_choice(max)
+    choice = gets.to_i
+    return unless (1..max).cover?(choice)
+
+    choice
   end
 
   def user_input
@@ -53,9 +56,9 @@ class Interface
   end
 
   def show_points(player)
-    return show_msg('', false, false) unless player.points
+    return show_msg('', false, false) unless player.show_points
 
-    show_msg("#{player.name} points: #{player.points}", false, false)
+    show_msg("#{player.name} points: #{player.show_points}", false, false)
   end
 
   def show_game_screen(*players)
