@@ -10,7 +10,9 @@ class Player
     @hand = Hand.new(visible_hand)
   end
 
-  def move; end
+  def reset
+    @hand = Hand.new
+  end
 
   def points
     points = 0
