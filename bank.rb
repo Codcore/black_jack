@@ -1,4 +1,6 @@
 class Bank
+  attr_reader :funds
+
   def initialize(amount = 100)
     @funds = amount
   end

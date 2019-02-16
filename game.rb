@@ -4,6 +4,8 @@ require_relative 'bank'
 require_relative 'card_deck'
 
 class Game
+  attr_reader :user, :dealer, :bank, :card_deck
+
   def initialize(user_name)
     @user      = User.new(user_name)
     @dealer    = Dealer.new
