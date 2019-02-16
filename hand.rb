@@ -1,11 +1,12 @@
-require 'card_deck'
+require_relative 'card_deck'
 
 class Hand
-  attr_reader :cards
+  attr_reader :cards, :visible
 
-  def initialize
-    @deck  = CardDeck.instance
-    @cards = @deck.draw_initial_hand
+  def initialize(visible = true)
+    @deck    = CardDeck.instance
+    @cards   = @deck.draw_initial_hand
+    @visible = visible
   end
 
   def pull_card(card)
@@ -16,5 +17,16 @@ class Hand
 
   def full?
     @cards.size == 3
+  end
+
+  def to_s
+    hand_str = ''
+    if @visible
+      @cards.each { |card| hand_str += card.to_s + ' ' }
+      return hand_str
+    end
+
+    @cards.size.times { hand_str += '* '}
+    hand_str
   end
 end
