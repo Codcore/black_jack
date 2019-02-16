@@ -34,8 +34,8 @@ class GameController
       winner.bank.receive(@bank.give_cash)
     else
       cash = @bank.give_cash
-      @dealer.receive(cash / 2)
-      @user.receive(cash / 2)
+      @dealer.bank.receive(cash / 2)
+      @user.bank.receive(cash / 2)
     end
     @dealer.reset_hand
     @user.reset_hand
