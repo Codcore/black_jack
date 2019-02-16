@@ -10,6 +10,8 @@ class Player
     @hand = Hand.new(visible_hand)
   end
 
+  def move; end
+
   def points
     return nil unless @hand.visible
 
