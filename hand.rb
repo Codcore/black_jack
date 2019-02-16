@@ -1,7 +1,8 @@
 require_relative 'card_deck'
 
 class Hand
-  attr_reader :cards, :visible
+  attr_reader :cards
+  attr_accessor :visible
 
   def initialize(visible = true)
     @deck    = CardDeck.instance

@@ -22,4 +22,9 @@ module InterfaceMessages
     'Pull card',
     'Open cards'
   ].freeze
+
+  GAME_OVER_MENU = [
+    'Try again',
+    'Exit'
+  ].freeze
 end
