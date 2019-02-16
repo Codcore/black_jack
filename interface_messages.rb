@@ -1,8 +1,9 @@
 module InterfaceMessages
-  LIMITER_END      = '╚══════════════════════════════════════════╝'.freeze
-  LIMITER_START    = '╔══════════════════════════════════════════╗'.freeze
-  WELCOME_MESSAGE  = '⤛ Welcome to the BLACK JACK ⤜'.freeze
-  USER_NAME_PROMPT = 'Enter your name:'.freeze
+  LIMITER_END      = '╚══════════════════════════════════════════════════════════════╝'.freeze
+  LIMITER_START    = '╔══════════════════════════════════════════════════════════════╗'.freeze
+  LIMITER_MIDDLE   = '╠══════════════════════════════════════════════════════════════╣'.freeze
+  WELCOME_MESSAGE  = '⤛  Welcome to the BLACK JACK ⤜'.freeze
+  USER_NAME_PROMPT = 'Enter your name'.freeze
 
   CARD_MENU = [
     'Skip move',
