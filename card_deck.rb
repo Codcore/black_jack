@@ -20,6 +20,7 @@ class CardDeck
 
   def refresh
     initialize
+    self
   end
 
   def draw_card

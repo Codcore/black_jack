@@ -10,9 +10,7 @@ class Game
     @user      = User.new(user_name)
     @dealer    = Dealer.new
     @bank      = Bank.new(0)
-    @card_deck = CardDeck.instance
+    @card_deck = CardDeck.instance.refresh
 
-    @bank.receive(@user.bank.bet)
-    @bank.receive(@dealer.bank.bet)
   end
 end
