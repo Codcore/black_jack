@@ -20,9 +20,15 @@ class GameController
   def setup
     @interface.show_msg(WELCOME_MESSAGE)
     @interface.show_menu(START_MENU)
-    return if @interface.user_choice == 2
-
-    @interface.show_prompt(USER_NAME_PROMPT)
-    @game = Game.new(@interface.user_input)
+    choice = @interface.user_choice
+    case choice
+    when 2 then return
+    when 1
+      @interface.show_prompt(USER_NAME_PROMPT)
+      @game = Game.new(@interface.user_input)
+    else
+      @interface.show_msg(INVALID_CHOICE)
+      setup
+    end
   end
 end
