@@ -23,4 +23,10 @@ class Bank
   def to_s
     @funds.to_s
   end
+
+  def give_cash
+    cash = @funds
+    @funds = 0
+    cash
+  end
 end
