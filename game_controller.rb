@@ -1,5 +1,6 @@
 require_relative 'interface'
 require_relative 'interface_messages'
+require_relative 'game'
 
 class GameController
   include InterfaceMessages
@@ -7,9 +8,14 @@ class GameController
   def initialize
     @interface = Interface.new
     setup
+    run
   end
 
-  def run; end
+  def run
+    @interface.show_hands(@game.user.name,
+                          @game.user.hand.to_s,
+                          @game.dealer.hand.to_s)
+  end
 
   def setup
     @interface.show_msg(WELCOME_MESSAGE)
