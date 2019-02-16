@@ -18,6 +18,10 @@ class CardDeck
     @cards.shuffle!
   end
 
+  def refresh
+    initialize
+  end
+
   def draw_card
     raise 'Cannot draw card: card deck is empty.' if @cards.empty?
 
