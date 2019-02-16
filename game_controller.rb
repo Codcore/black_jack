@@ -37,6 +37,8 @@ class GameController
       @dealer.bank.receive(cash / 2)
       @user.bank.receive(cash / 2)
     end
+    end_game(@user) if @user.bank.empty?
+    end_game(@dealer) if @dealer.bank.empty?
     @dealer.reset_hand
     @user.reset_hand
     make_bets
@@ -46,7 +48,7 @@ class GameController
 
   def run
     loop do
-      system('clear')
+      cls
       @interface.show_game_screen(@dealer, @user)
       menu = @interface.compose_actions_menu
       choice = process_empty_choice(@interface.show_menu_and_get_input(menu), menu)
@@ -58,14 +60,13 @@ class GameController
       end
       game_over(nil) if @user.points == @dealer.points
       game_over(@user, true) if @user.points == BLACK_JACK
-      end_game(@user) if @user.bank.empty?
-      end_game(@dealer) if @dealer.bank.empty?
+
       game_over(winner) if @user.hand.full? && @dealer.hand.full?
     end
   end
 
-  def init
-    system('clear')
+  def init(clear = true)
+    cls if clear
     @interface.show_msg(WELCOME_MESSAGE)
     choice = @interface.show_menu_and_get_input(START_MENU)
     case choice
@@ -76,7 +77,7 @@ class GameController
     when START_MENU[1] then return
     else
       @interface.show_msg(INVALID_CHOICE)
-      init
+      init(false)
     end
   end
 
@@ -103,7 +104,7 @@ class GameController
   end
 
   def game_over(winner, black_jack = false)
-    system('clear')
+    cls
     @dealer.hand.visible = true
     @interface.show_game_screen(@dealer, @user)
     if black_jack
@@ -125,11 +126,12 @@ class GameController
   end
 
   def end_game(looser)
+    cls
     @interface.show_empty_bank_msg(looser)
     winner = [@user, @dealer].delete(looser)
-    @interface.show_msg('You loose... =(') if winner.is_a? Dealer
-    @interface.show_msg('ou win!!!'.upcase) if winner.is_a? User
-    init
+    @interface.show_msg('You spent all your money and go home with empty pockets... =(') if winner.is_a? User
+    @interface.show_msg('You win a game!!! Now you can buy a yacht!!!'.upcase) if winner.is_a? Dealer
+    init(false)
   end
 
   def process_empty_choice(choice, menu)
@@ -140,5 +142,9 @@ class GameController
       choice = @interface.show_menu_and_get_input(GAME_OVER_MENU)
     end
     choice
+  end
+
+  def cls
+    system('clear')
   end
 end
