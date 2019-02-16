@@ -61,11 +61,16 @@ class Interface
     show_msg("#{player.name} points: #{player.show_points}", false, false)
   end
 
+  def show_bank(player)
+    show_msg("#{player.name} bank: #{player.bank} $", false, false)
+  end
+
   def show_game_screen(*players)
     show_start_limiter
     players.each do |player|
       show_hand(player)
       show_points(player)
+      show_bank(player)
       player == players.last ? show_end_limiter : show_middle_limiter
     end
   end
