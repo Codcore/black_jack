@@ -30,7 +30,13 @@ class GameController
   end
 
   def try_again_set_up(winner)
-    winner.bank.receive(@bank.give_cash)
+    if winner
+      winner.bank.receive(@bank.give_cash)
+    else
+      cash = @bank.give_cash
+      @dealer.receive(cash / 2)
+      @user.receive(cash / 2)
+    end
     @dealer.reset
     @user.reset
     make_bets
@@ -48,8 +54,9 @@ class GameController
       when ACTIONS_MENU[0] then action_skip
       when ACTIONS_MENU[1] then action_pull_card
       when ACTIONS_MENU[2] then action_open_cards
-      else next
+      else return
       end
+      game_over(nil) if @user.points == @dealer.points
       game_over(@user, true) if @user.points == BLACK_JACK
       end_game(@user) if @user.bank.empty?
       end_game(@dealer) if @dealer.bank.empty?
@@ -100,10 +107,12 @@ class GameController
     @dealer.hand.visible = true
     @interface.show_game_screen(@dealer, @user)
     if black_jack
-      @interface.show_msg('BlackJack, you win!!!'.upcase)
-    else
+      @interface.show_msg('BlackJack - you win!!!'.upcase)
+    elsif winner
       @interface.show_msg("#{@user.name}, you win!!!".upcase) if winner.is_a? User
       @interface.show_msg("#{@user.name}, you loose... =(") if winner.is_a? Dealer
+    else
+      @interface.show_msg("DRAW!")
     end
 
     choice = process_empty_choice(@interface.show_menu_and_get_input(GAME_OVER_MENU), GAME_OVER_MENU)
