@@ -2,9 +2,11 @@ require_relative 'interface'
 require_relative 'interface_messages'
 require_relative 'game'
 require_relative 'card_deck'
+require_relative 'black_jack'
 
 class GameController
   include InterfaceMessages
+  include BlackJack
 
   def initialize
     @interface = Interface.new
@@ -61,12 +63,13 @@ class GameController
 
   def action_skip
     @dealer.move
-    game_over(@user) if @dealer.points > 21
+    game_over(@user) if @dealer.points > BLACK_JACK
+    @interface.actions_menu_items = [1, 2]
   end
 
   def action_pull_card
     @user.hand.pull_card(@game.card_deck.draw_card)
-    game_over(@dealer) if @user.points > 21
+    game_over(@dealer) if @user.points > BLACK_JACK
   end
 
   def action_open_cards
