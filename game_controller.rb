@@ -42,13 +42,15 @@ class GameController
     loop do
       system('clear')
       @interface.show_game_screen(@dealer, @user)
-      choice = @interface.show_menu_and_get_input(@interface.compose_actions_menu)
+      menu = @interface.compose_actions_menu
+      choice = process_empty_choice(@interface.show_menu_and_get_input(menu), menu)
       case choice
       when ACTIONS_MENU[0] then action_skip
       when ACTIONS_MENU[1] then action_pull_card
       when ACTIONS_MENU[2] then action_open_cards
       else next
       end
+      game_over(@user, true) if @user.points == BLACK_JACK
       end_game(@user) if @user.bank.empty?
       end_game(@dealer) if @dealer.bank.empty?
       game_over(winner) if @user.hand.full? && @dealer.hand.full?
@@ -59,7 +61,6 @@ class GameController
     system('clear')
     @interface.show_msg(WELCOME_MESSAGE)
     choice = @interface.show_menu_and_get_input(START_MENU)
-    puts choice
     case choice
     when START_MENU[0]
       system('clear')
@@ -94,13 +95,18 @@ class GameController
     @game.determine_winner
   end
 
-  def game_over(winner)
+  def game_over(winner, black_jack = false)
     system('clear')
     @dealer.hand.visible = true
     @interface.show_game_screen(@dealer, @user)
-    @interface.show_msg("#{@user.name}, you win!!!".upcase) if winner.is_a? User
-    @interface.show_msg("#{@user.name}, you loose... =(") if winner.is_a? Dealer
-    choice = @interface.show_menu_and_get_input(GAME_OVER_MENU)
+    if black_jack
+      @interface.show_msg('BlackJack, you win!!!'.upcase)
+    else
+      @interface.show_msg("#{@user.name}, you win!!!".upcase) if winner.is_a? User
+      @interface.show_msg("#{@user.name}, you loose... =(") if winner.is_a? Dealer
+    end
+
+    choice = process_empty_choice(@interface.show_menu_and_get_input(GAME_OVER_MENU), GAME_OVER_MENU)
     case choice
     when GAME_OVER_MENU[0]
       try_again_set_up(winner)
@@ -115,5 +121,15 @@ class GameController
     @interface.show_msg("You loose... =(") if winner.is_a? Dealer
     @interface.show_msg("You win!!!".upcase) if winner.is_a? User
     init
+  end
+
+  def process_empty_choice(choice, menu)
+    until choice
+      system('clear')
+      @interface.show_msg(INVALID_CHOICE)
+      @interface.show_game_screen(@dealer, @user)
+      choice = @interface.show_menu_and_get_input(GAME_OVER_MENU)
+    end
+    choice
   end
 end

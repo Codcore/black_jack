@@ -66,10 +66,8 @@ class Interface
   def show_menu_and_get_input(array)
     show_msg(construct_menu(array))
     choice = user_choice(array.size)
-    unless choice
-      show_msg(INVALID_CHOICE)
-      show_menu_and_get_input(array)
-    end
+    return unless choice
+
     array[choice - 1]
   end
 
@@ -104,7 +102,7 @@ class Interface
   end
 
   def show_empty_bank_msg(player)
-    show_msg("Game is over!!! #{player.upcase} bank is empty!")
+    show_msg("Game is over!!! #{player.name} bank is empty!")
   end
 
   private
