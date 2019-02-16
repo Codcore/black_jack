@@ -47,12 +47,24 @@ class Interface
     show_msg(construct_menu(array))
   end
 
-  def show_hands(player_name, player_cards, dealer_cards)
-    show_msg('Dealer cards:', true, false)
-    show_msg(dealer_cards, false, false)
-    show_middle_limiter
-    show_msg("#{player_name}, Your cards:", false, false)
-    show_msg(player_cards, false, true)
+  def show_hand(player)
+    show_msg("#{player.name} cards:", false, false)
+    show_msg("#{player.hand}", false, false)
+  end
+
+  def show_points(player)
+    return show_msg('', false, false) unless player.points
+
+    show_msg("#{player.name} points: #{player.points}", false, false)
+  end
+
+  def show_screen(*players)
+    show_start_limiter
+    players.each do |player|
+      show_hand(player)
+      show_points(player)
+      player == players.last ? show_end_limiter : show_middle_limiter
+    end
   end
 
   private

@@ -1,6 +1,7 @@
 require_relative 'interface'
 require_relative 'interface_messages'
 require_relative 'game'
+require_relative 'card_deck'
 
 class GameController
   include InterfaceMessages
@@ -12,9 +13,7 @@ class GameController
   end
 
   def run
-    @interface.show_hands(@game.user.name,
-                          @game.user.hand.to_s,
-                          @game.dealer.hand.to_s)
+    @interface.show_screen(@game.dealer, @game.user)
   end
 
   def setup
