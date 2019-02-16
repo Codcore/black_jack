@@ -11,6 +11,7 @@ class CardDeck
     Card::SUITS.keys.each do |suit|
       Card::MERITS.each { |merit| @cards << Card.new(suit, merit) }
     end
+    shuffle
   end
 
   def shuffle
