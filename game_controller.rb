@@ -13,7 +13,8 @@ class GameController
   end
 
   def run
-    @interface.show_screen(@game.dealer, @game.user)
+    @interface.show_game_screen(@game.dealer, @game.user)
+    @interface.show_actions
   end
 
   def setup

@@ -15,4 +15,10 @@ module InterfaceMessages
     'Start game',
     'Quit game'
   ].freeze
+
+  ACTIONS_MENU = [
+    'Skip',
+    'Pull card',
+    'Open cards'
+  ].freeze
 end
