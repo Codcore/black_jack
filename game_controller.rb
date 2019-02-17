@@ -113,7 +113,7 @@ class GameController
       @interface.show_msg("#{@user.name}, you win!!!".upcase) if winner.is_a? User
       @interface.show_msg("#{@user.name}, you loose... =(") if winner.is_a? Dealer
     else
-      @interface.show_msg("DRAW!")
+      @interface.show_msg('DRAW!')
     end
 
     choice = process_empty_choice(@interface.show_menu_and_get_input(GAME_OVER_MENU), GAME_OVER_MENU)
@@ -134,7 +134,7 @@ class GameController
     init(false)
   end
 
-  def process_empty_choice(choice, menu)
+  def process_empty_choice(choice, _menu)
     until choice
       system('clear')
       @interface.show_msg(INVALID_CHOICE)

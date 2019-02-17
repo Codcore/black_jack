@@ -27,7 +27,7 @@ class Hand
       return hand_str
     end
 
-    @cards.size.times { hand_str += '* '}
+    @cards.size.times { hand_str += '* ' }
     hand_str
   end
 end

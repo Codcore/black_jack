@@ -26,7 +26,8 @@ class Interface
     to_fill    = str_length - msg.length
     fill_start = to_fill / 2
     fill_end   = to_fill - fill_start
-    fill_start_str, fill_end_str = '', ''
+    fill_start_str = ''
+    fill_end_str = ''
     fill_start.times { fill_start_str += ' ' }
     fill_end.times   { fill_end_str   += ' ' }
     fill_start_str = "║#{fill_start_str}"
@@ -78,7 +79,7 @@ class Interface
 
   def show_hand(player)
     show_msg("#{player.name} cards:", false, false)
-    show_msg("#{player.hand}", false, false)
+    show_msg(player.hand.to_s, false, false)
   end
 
   def show_points(player)
