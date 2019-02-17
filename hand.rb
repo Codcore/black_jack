@@ -1,6 +1,9 @@
 require_relative 'card_deck'
+require_relative 'black_jack'
 
 class Hand
+  include BlackJack
+
   attr_reader :cards
   attr_accessor :visible
 
@@ -16,18 +19,32 @@ class Hand
     @cards << card
   end
 
+  def points
+    points = 0
+    aces_arr = []
+    @cards.each do |card|
+      if card.value.is_a?(Array)
+        aces_arr << card.value
+        next
+      end
+      points += card.value
+    end
+    unless aces_arr.empty?
+      aces_arr.each do |aces_values|
+        ace_value = (BLACK_JACK - points) >= 11 ? aces_values[1] : aces_values[0]
+        points += ace_value
+      end
+    end
+    points
+  end
+
   def full?
     @cards.size == 3
   end
 
   def to_s
-    hand_str = ''
-    if @visible
-      @cards.each { |card| hand_str += card.to_s + ' ' }
-      return hand_str
-    end
+    return @cards.join(' ') if visible
 
-    @cards.size.times { hand_str += '* ' }
-    hand_str
+    @cards.map { '*' }.join(' ')
   end
 end

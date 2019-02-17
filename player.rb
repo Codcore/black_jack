@@ -15,16 +15,7 @@ class Player
   end
 
   def points
-    points = 0
-    @hand.cards.each do |card|
-      if card.value.is_a?(Array)
-        value = (21 - points) >= 11 ? card.value[1] : card.value[0]
-        points += value
-        next
-      end
-      points += card.value
-    end
-    points
+    @hand.points
   end
 
   def show_points
