@@ -60,7 +60,6 @@ class GameController
       end
       game_over(nil) if @user.points == @dealer.points
       game_over(@user, true) if @user.points == BLACK_JACK
-
       game_over(winner) if @user.hand.full? && @dealer.hand.full?
     end
   end

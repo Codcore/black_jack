@@ -16,7 +16,11 @@ class Game
   end
 
   def determine_winner
-    return nil if @dealer.points == @user.points
+    return if @dealer.points == @user.points
+    return if (@dealer.points > BLACK_JACK) && (@user.points > BLACK_JACK)
+
+    @dealer if @user.points > BLACK_JACK
+    @user if @dealer.points > BLACK_JACK
 
     BLACK_JACK - @user.points < BLACK_JACK - @dealer.points ? @user : @dealer
   end
