@@ -106,6 +106,10 @@ class Interface
     show_msg("Game is over!!! #{player.name} bank is empty!")
   end
 
+  def cls
+    system('clear')
+  end
+
   private
 
   def construct_menu(array)

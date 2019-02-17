@@ -48,7 +48,7 @@ class GameController
 
   def run
     loop do
-      cls
+      @interface.cls
       @interface.show_game_screen(@dealer, @user)
       menu = @interface.compose_actions_menu
       choice = process_empty_choice(@interface.show_menu_and_get_input(menu), menu)
@@ -65,7 +65,7 @@ class GameController
   end
 
   def init(clear = true)
-    cls if clear
+    @interface.cls if clear
     @interface.show_msg(WELCOME_MESSAGE)
     choice = @interface.show_menu_and_get_input(START_MENU)
     case choice
@@ -103,7 +103,7 @@ class GameController
   end
 
   def game_over(winner, black_jack = false)
-    cls
+    @interface.cls
     @dealer.hand.visible = true
     @interface.show_game_screen(@dealer, @user)
     if black_jack
@@ -125,7 +125,7 @@ class GameController
   end
 
   def end_game(looser)
-    cls
+    @interface.cls
     @interface.show_empty_bank_msg(looser)
     winner = [@user, @dealer].delete(looser)
     @interface.show_msg('You spent all your money and go home with empty pockets... =(') if winner.is_a? User
@@ -135,15 +135,11 @@ class GameController
 
   def process_empty_choice(choice, _menu)
     until choice
-      system('clear')
+      @interface.cls
       @interface.show_msg(INVALID_CHOICE)
       @interface.show_game_screen(@dealer, @user)
       choice = @interface.show_menu_and_get_input(GAME_OVER_MENU)
     end
     choice
-  end
-
-  def cls
-    system('clear')
   end
 end
