@@ -5,6 +5,8 @@ module InterfaceMessages
   WELCOME_MESSAGE  = '⤛  Welcome to the BLACK JACK ⤜'.freeze
   USER_NAME_PROMPT = 'Enter your name'.freeze
   INVALID_CHOICE   = 'ERROR: Invalid choice. Try again'.upcase.freeze
+  BLACK_JACK_MSG = 'BlackJack - you win!!!'.upcase.freeze
+  DRAW_MSG = 'DRAW!'.freeze
 
   START_MENU = [
     'Start game',

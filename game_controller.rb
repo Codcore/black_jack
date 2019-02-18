@@ -53,9 +53,9 @@ class GameController
       menu = @interface.compose_actions_menu
       choice = process_empty_choice(@interface.show_menu_and_get_input(menu), menu)
       case choice
-      when ACTIONS_MENU[:skip] then action_skip
-      when ACTIONS_MENU[:pull_card] then action_pull_card
-      when ACTIONS_MENU[:open_cards] then action_open_cards
+      when :skip then action_skip
+      when :pull_card then action_pull_card
+      when :open_cards then action_open_cards
       else return
       end
       game_over(nil) if @user.points == @dealer.points
@@ -107,11 +107,11 @@ class GameController
     @dealer.hand.visible = true
     @interface.show_game_screen(@dealer, @user)
     if black_jack
-      @interface.show_msg('BlackJack - you win!!!'.upcase)
+      @interface.show_msg(BLACK_JACK_MSG)
     elsif winner
       @interface.show_congratulation(winner, @user_name)
     else
-      @interface.show_msg('DRAW!')
+      @interface.show_msg(DRAW_MSG)
     end
 
     choice = process_empty_choice(@interface.show_menu_and_get_input(GAME_OVER_MENU), GAME_OVER_MENU)
@@ -126,17 +126,16 @@ class GameController
   def end_game(looser)
     @interface.cls
     @interface.show_empty_bank_msg(looser)
-    winner = [@user, @dealer].delete(looser)
     @interface.show_game_end(looser)
     init(false)
   end
 
-  def process_empty_choice(choice, _menu)
+  def process_empty_choice(choice, menu)
     until choice
       @interface.cls
       @interface.show_msg(INVALID_CHOICE)
       @interface.show_game_screen(@dealer, @user)
-      choice = @interface.show_menu_and_get_input(GAME_OVER_MENU)
+      choice = @interface.show_menu_and_get_input(menu)
     end
     choice
   end
