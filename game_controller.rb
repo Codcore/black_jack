@@ -109,7 +109,7 @@ class GameController
     if black_jack
       @interface.show_msg('BlackJack - you win!!!'.upcase)
     elsif winner
-      @interface.show_congratulation(winner)
+      @interface.show_congratulation(winner, @user_name)
     else
       @interface.show_msg('DRAW!')
     end
