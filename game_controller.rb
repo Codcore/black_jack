@@ -53,9 +53,9 @@ class GameController
       menu = @interface.compose_actions_menu
       choice = process_empty_choice(@interface.show_menu_and_get_input(menu), menu)
       case choice
-      when ACTIONS_MENU[0] then action_skip
-      when ACTIONS_MENU[1] then action_pull_card
-      when ACTIONS_MENU[2] then action_open_cards
+      when ACTIONS_MENU[:skip] then action_skip
+      when ACTIONS_MENU[:pull_card] then action_pull_card
+      when ACTIONS_MENU[:open_cards] then action_open_cards
       else return
       end
       game_over(nil) if @user.points == @dealer.points
@@ -70,7 +70,7 @@ class GameController
     choice = @interface.show_menu_and_get_input(START_MENU)
     case choice
     when START_MENU[0]
-      system('clear')
+      @interface.cls
       @user_name = @interface.show_prompt_and_get_input(USER_NAME_PROMPT)
       set_up
     when START_MENU[1] then return
@@ -81,14 +81,14 @@ class GameController
   end
 
   def action_skip
-    @interface.actions_menu_items = [1, 2] if @dealer.hand.full?
+    @interface.actions_menu_items = [:pull_card, :open_cards] if @dealer.hand.full?
     @dealer.move
     game_over(@user) if @dealer.points > BLACK_JACK
-    @interface.actions_menu_items = [1, 2]
+    @interface.actions_menu_items = [:pull_card, :open_cards]
   end
 
   def action_pull_card
-    @interface.actions_menu_items = [2]
+    @interface.actions_menu_items = [:open_cards]
     @user.hand.pull_card(@game.card_deck.draw_card)
     game_over(@dealer) if @user.points > BLACK_JACK
   end

@@ -6,22 +6,16 @@ module InterfaceMessages
   USER_NAME_PROMPT = 'Enter your name'.freeze
   INVALID_CHOICE   = 'ERROR: Invalid choice. Try again'.upcase.freeze
 
-  CARD_MENU = [
-    'Skip move',
-    'Get card',
-    'Open cards'
-  ].freeze
-
   START_MENU = [
     'Start game',
     'Quit game'
   ].freeze
 
-  ACTIONS_MENU = [
-    'Skip',
-    'Pull card',
-    'Open cards'
-  ].freeze
+  ACTIONS_MENU = {
+    skip: 'Skip',
+    pull_card: 'Pull card',
+    open_cards: 'Open cards'
+  }.freeze
 
   GAME_OVER_MENU = [
     'Try again',

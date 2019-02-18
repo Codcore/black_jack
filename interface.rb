@@ -5,7 +5,7 @@ class Interface
   include InterfaceMessages
 
   def initialize
-    @actions_menu_items = [0, 1, 2]
+    @actions_menu_items = [:skip, :pull_card, :open_cards]
   end
 
   def refresh_menu_items
