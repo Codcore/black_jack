@@ -51,7 +51,7 @@ class GameController
       @interface.cls
       @interface.show_game_screen(@dealer, @user)
       menu = @interface.compose_actions_menu
-      choice = process_empty_choice(@interface.show_menu_and_get_input(menu), menu)
+      choice = @interface.process_empty_choice(@interface.show_menu_and_get_input(menu), menu)
       case choice
       when :skip then action_skip
       when :pull_card then action_pull_card
@@ -114,7 +114,7 @@ class GameController
       @interface.show_msg(DRAW_MSG)
     end
 
-    choice = process_empty_choice(@interface.show_menu_and_get_input(GAME_OVER_MENU), GAME_OVER_MENU)
+    choice = @interface.process_empty_choice(@interface.show_menu_and_get_input(GAME_OVER_MENU), GAME_OVER_MENU)
     case choice
     when GAME_OVER_MENU[0]
       try_again_set_up(winner)
@@ -128,15 +128,5 @@ class GameController
     @interface.show_empty_bank_msg(looser)
     @interface.show_game_end(looser)
     init(false)
-  end
-
-  def process_empty_choice(choice, menu)
-    until choice
-      @interface.cls
-      @interface.show_msg(INVALID_CHOICE)
-      @interface.show_game_screen(@dealer, @user)
-      choice = @interface.show_menu_and_get_input(menu)
-    end
-    choice
   end
 end

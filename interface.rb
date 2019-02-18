@@ -120,6 +120,16 @@ class Interface
     system('clear')
   end
 
+  def process_empty_choice(choice, menu)
+    until choice
+      cls
+      show_msg(INVALID_CHOICE)
+      show_game_screen(@dealer, @user)
+      choice = show_menu_and_get_input(menu)
+    end
+    choice
+  end
+
   private
 
   def construct_menu(array)
