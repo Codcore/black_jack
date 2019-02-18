@@ -106,6 +106,16 @@ class Interface
     show_msg("Game is over!!! #{player.name} bank is empty!")
   end
 
+  def show_congratulation(winner)
+    show_msg("#{winner.name}, you win!!!".upcase) if winner.is_a? User
+    show_msg("#{winner.name}, you loose... =(") if winner.is_a? Dealer
+  end
+
+  def show_game_end(looser)
+    show_msg('You spent all your money and go home with empty pockets... =(') if looser.is_a? User
+    show_msg('You win a game!!! Now you can buy a yacht!!!'.upcase) if looser.is_a? Dealer
+  end
+
   def cls
     system('clear')
   end

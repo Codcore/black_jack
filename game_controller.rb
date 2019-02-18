@@ -109,8 +109,7 @@ class GameController
     if black_jack
       @interface.show_msg('BlackJack - you win!!!'.upcase)
     elsif winner
-      @interface.show_msg("#{@user.name}, you win!!!".upcase) if winner.is_a? User
-      @interface.show_msg("#{@user.name}, you loose... =(") if winner.is_a? Dealer
+      @interface.show_congratulation(winner)
     else
       @interface.show_msg('DRAW!')
     end
@@ -128,8 +127,7 @@ class GameController
     @interface.cls
     @interface.show_empty_bank_msg(looser)
     winner = [@user, @dealer].delete(looser)
-    @interface.show_msg('You spent all your money and go home with empty pockets... =(') if winner.is_a? User
-    @interface.show_msg('You win a game!!! Now you can buy a yacht!!!'.upcase) if winner.is_a? Dealer
+    @interface.show_game_end(looser)
     init(false)
   end
 
