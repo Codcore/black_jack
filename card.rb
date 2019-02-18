@@ -6,6 +6,8 @@ class Card
     diamond: '♦'
   }.freeze
 
+  ACE_CORRECTION = 10
+
   MERITS = %w[2 3 4 5 6 7 8 9 10 J Q K A].freeze
 
   attr_reader :merit, :suit
@@ -19,10 +21,13 @@ class Card
     @merit = merit
   end
 
+  def ace?
+    @merit == 'A'
+  end
+
   def value
     value = @merit.to_i
-    return [1, 11] if @merit == 'A'
-
+    return 11 if ace?
     return 10 if value.zero?
 
     value

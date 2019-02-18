@@ -1,3 +1,4 @@
+require_relative 'card'
 require_relative 'card_deck'
 require_relative 'black_jack'
 
@@ -20,22 +21,8 @@ class Hand
   end
 
   def points
-    points = 0
-    aces_arr = []
-    @cards.each do |card|
-      if card.value.is_a?(Array)
-        aces_arr << card.value
-        next
-      end
-      points += card.value
-    end
-    unless aces_arr.empty?
-      aces_arr.each do |aces_values|
-        ace_value = (BLACK_JACK - points) >= 11 ? aces_values[1] : aces_values[0]
-        points += ace_value
-      end
-    end
-    points
+    result = @cards.sum(&:value)
+    ace_correction(result)
   end
 
   def full?
@@ -46,5 +33,14 @@ class Hand
     return @cards.join(' ') if visible
 
     @cards.map { '*' }.join(' ')
+  end
+
+  private
+
+  def ace_correction(points)
+    @cards.each do |card|
+      points -= Card::ACE_CORRECTION if card.ace? && points > BLACK_JACK
+    end
+    points
   end
 end
