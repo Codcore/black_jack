@@ -8,10 +8,10 @@ module InterfaceMessages
   BLACK_JACK_MSG = 'BlackJack - you win!!!'.upcase.freeze
   DRAW_MSG = 'DRAW!'.freeze
 
-  START_MENU = [
-    'Start game',
-    'Quit game'
-  ].freeze
+  START_MENU = {
+    start_game: 'Start game',
+    quit_game: 'Quit game'
+  }.freeze
 
   ACTIONS_MENU = {
     skip: 'Skip',
@@ -19,8 +19,8 @@ module InterfaceMessages
     open_cards: 'Open cards'
   }.freeze
 
-  GAME_OVER_MENU = [
-    'Try again',
-    'Exit'
-  ].freeze
+  GAME_OVER_MENU = {
+    try_again: 'Try again',
+    exit: 'Exit'
+  }.freeze
 end

@@ -13,9 +13,9 @@ class Interface
   end
 
   def compose_actions_menu
-    actions_menu = []
-    @actions_menu_items.each do |index|
-      actions_menu << ACTIONS_MENU[index]
+    actions_menu = {}
+    @actions_menu_items.each do |k, v|
+      actions_menu[k] = ACTIONS_MENU[k]
     end
     actions_menu
   end
@@ -64,12 +64,12 @@ class Interface
     gets.chomp.to_s
   end
 
-  def show_menu_and_get_input(array)
-    show_msg(construct_menu(array))
-    choice = user_choice(array.size)
+  def show_menu_and_get_input(menu_hash)
+    show_msg(construct_menu(menu_hash.values))
+    choice = user_choice(menu_hash.size)
     return unless choice
 
-    array[choice - 1]
+    menu_hash.keys[choice - 1]
   end
 
   def show_prompt_and_get_input(msg)

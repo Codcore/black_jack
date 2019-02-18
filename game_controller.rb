@@ -69,11 +69,11 @@ class GameController
     @interface.show_msg(WELCOME_MESSAGE)
     choice = @interface.show_menu_and_get_input(START_MENU)
     case choice
-    when START_MENU[0]
+    when :start_game
       @interface.cls
       @user_name = @interface.show_prompt_and_get_input(USER_NAME_PROMPT)
       set_up
-    when START_MENU[1] then return
+    when :quit_game then return
     else
       @interface.show_msg(INVALID_CHOICE)
       init(false)
@@ -116,9 +116,9 @@ class GameController
 
     choice = @interface.process_empty_choice(@interface.show_menu_and_get_input(GAME_OVER_MENU), GAME_OVER_MENU)
     case choice
-    when GAME_OVER_MENU[0]
+    when :try_again
       try_again_set_up(winner)
-    when GAME_OVER_MENU[1] then exit
+    when :exit then exit
     else exit
     end
   end
